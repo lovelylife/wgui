@@ -4,6 +4,8 @@ namespace wgui { namespace html {
 
 document::document()
   : step_( intagname )
+  , html_get_( false )
+  , body_get_( false )
 {
 
 }
@@ -17,33 +19,63 @@ const char* document::render( const char* str, size_t size )
 {
   const char* p = str;
   const char* endp = str + size;
-
-  switch( step_ )
+  
+  while( p < endp )
   {
-  case intext:
-    break;
+    switch( *p )
+    {
+    case '<':
+      break;
 
-  case intagname:
+    case '>':
+      break;
 
-    break;
+    ca
+    }
+  //switch( step_ )
+  //{
+  //case intext:
+  //  return parse_intext( str, size );
+  //  break;
 
-  case intag:
-    break;
+  //case intagname:
 
-  case completed:
-    break;
+  //  break;
 
-  default:
-    return p;
+  //case intag:
+  //  break;
 
-  };
+  //case completed:
+  //  break;
+
+  //default:
+  //  return p;
+
+  //};
+  }
+  // end while
 
   return p;  
 }
 
-void document::toOuterHTML(const std::string & o)
+void document::toOuterHTML( const std::string & o )
 {
 
+}
+
+const char * document::parse_intext( const char * s, size_t size )
+{
+  return nullptr;
+}
+
+const char * document::parse_intagname( const char * s, size_t size )
+{
+  return nullptr;
+}
+
+const char * document::parse_intag( const char * s, size_t size )
+{
+  return nullptr;
 }
 
 
