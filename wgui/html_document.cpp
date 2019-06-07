@@ -3,9 +3,9 @@
 namespace wgui { namespace html {
 
 document::document()
-  : step_( intagname )
-  , html_get_( false )
+  : html_get_( false )
   , body_get_( false )
+  , parsing_( false )
 {
 
 }
@@ -19,19 +19,48 @@ const char* document::render( const char* str, size_t size )
 {
   const char* p = str;
   const char* endp = str + size;
-  
-  while( p < endp )
+  char c = '\0'; 
+
+  if( size == 0 )
   {
-    switch( *p )
+    return NULL;
+  }
+
+
+
+  if( parsing_ )
+  {
+    switch( parsing_type_ )
     {
-    case '<':
+    case element::node:
       break;
-
-    case '>':
+    
+    case element::comment:
       break;
-
-    ca
     }
+  }
+  else
+  {
+    // Parse new
+    if( *p == '<' )
+    {
+      // Tag node or comment node
+      //parsing_type_ = element::node;
+    } 
+    else 
+    {
+      // Text node
+      parsing_type_ = element::text;
+    }
+
+    // Start parsing
+    parsing_ = true;
+
+    // Return
+    return render( p+1, size - 1 );
+  }
+
+ 
   //switch( step_ )
   //{
   //case intext:
@@ -52,7 +81,7 @@ const char* document::render( const char* str, size_t size )
   //  return p;
 
   //};
-  }
+  //}
   // end while
 
   return p;  

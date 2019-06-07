@@ -10,8 +10,14 @@ namespace wgui { namespace html {
 
 class element 
 {
-
-
+public:
+  typedef 
+  enum _type
+  {
+    node,
+    text,
+    comment,
+  } type;
 
 };
 
@@ -41,24 +47,13 @@ private:
   const char* parse_intag( const char* s, size_t size );
 
 
-public:
-  typedef 
-  enum __step 
-  {
-    uninit = 0,
-    intext,
-    intagname, 
-    intag,
-    completed
-  } step;
-
-
 private:
   body_element body_;
   int type_;
   std::list< std::string > stack_;
   std::string tagname_;
-  step step_;  
+  element::type parsing_type_;
+  bool parsing_;
   bool body_get_;
   bool html_get_;
 };
