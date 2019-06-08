@@ -149,15 +149,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="html_document.cpp" />
+    <ClCompile Include="qstring.cpp" />
     <ClCompile Include="_main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="html_document.h" />
+    <ClInclude Include="qstring.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="testhtml.html" />
+    <None Include="testhtml2.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

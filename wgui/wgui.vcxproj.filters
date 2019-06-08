@@ -16,6 +16,9 @@
     <Filter Include="testhtml">
       <UniqueIdentifier>{3f5a5741-2540-419c-bb5b-9a90ad0e8d5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{0377958e-33a7-4bdb-a0ca-89261e5fb772}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_main.cpp">
@@ -24,14 +27,23 @@
     <ClCompile Include="html_document.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="qstring.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="html_document.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="qstring.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="testhtml.html">
+      <Filter>testhtml</Filter>
+    </None>
+    <None Include="testhtml2.html">
       <Filter>testhtml</Filter>
     </None>
   </ItemGroup>

@@ -1,4 +1,6 @@
 #include "html_document.h"
+#include <assert.h>
+
 
 namespace wgui { namespace html {
 
@@ -15,6 +17,20 @@ document::~document()
 {
 }
 
+
+const char * document::_strchr(const char * str, size_t size, char ch) {
+  const char* p = str;
+  const char* endp = str+size;
+
+  while( p <= endp ) {
+    if( *p == ch ) {
+      return p;
+    }
+  }
+
+  return NULL;
+}
+
 const char* document::render( const char* str, size_t size )
 {
   const char* p = str;
@@ -27,38 +43,110 @@ const char* document::render( const char* str, size_t size )
   }
 
 
-
-  if( parsing_ )
+  while( p <= endp )
   {
-    switch( parsing_type_ )
-    {
-    case element::node:
-      break;
-    
-    case element::comment:
-      break;
-    }
-  }
-  else
-  {
-    // Parse new
     if( *p == '<' )
     {
-      // Tag node or comment node
-      //parsing_type_ = element::node;
-    } 
-    else 
+      if( parsing_ )
+      {
+
+      }
+      else
+      {
+        parsing_ = true;
+      }
+    }
+    else if( *p == '>' )
     {
-      // Text node
-      parsing_type_ = element::text;
+      if( parsing_ )
+      {
+        // Push
+        stack_.push_back( tagname_ );
+        printf("push %s\n", tagname_.c_str() );
+        tagname_.clear();
+        parsing_ = false;
+      }
+      else
+      {
+
+      }
+    }
+    else
+    {
+      //if( parsing_ )
+      {
+        tagname_.append( p, 1 );
+      }
+      //else
+      {
+
+      }
     }
 
-    // Start parsing
-    parsing_ = true;
-
-    // Return
-    return render( p+1, size - 1 );
+    p++;
   }
+
+
+  //if( parsing_ )
+  //{
+  //  if( parsing_type_ == element::text )
+  //  {
+  //    const char* t = strchr( p, '<' );
+  //    
+  //  }
+  //}
+  //else
+  //{
+  //  // Parse new
+  //  if( *p == '<' )
+  //  {
+  //    // Tag node or comment node
+  //    //parsing_type_ = element::node;
+  //    // <tag/>, 
+  //    // <tag>xxx</tag>, 
+  //    // <!-- comment -->,
+  //    // <!--[]> <![]-->
+  //    if( size == 1 )
+  //    {
+  //      // Parse end
+  //      return NULL;
+  //    }
+  //    else
+  //    {
+  //      if( *( p+1 ) != '!' )
+  //      {
+  //        parsing_type_ = element::node; 
+  //      }
+  //      else
+  //      {
+  //        // comment
+
+  //      }
+  //    }
+  //    const char* t = strchr( p, '>' );
+  //    if( t == NULL )
+  //    {
+  //      
+  //    }
+  //    else
+  //    {
+  //      // Find a tag or comment 
+  //      tagname_.assign( p+1, t-p );
+  //    }
+  //    
+  //  } 
+  //  else 
+  //  {
+  //    // Text node
+  //    parsing_type_ = element::text;
+  //  }
+
+  //  // Start parsing
+  //  parsing_ = true;
+
+  //  // Return
+  //  return render( p+1, size - 1 );
+  //}
 
  
   //switch( step_ )
@@ -91,22 +179,6 @@ void document::toOuterHTML( const std::string & o )
 {
 
 }
-
-const char * document::parse_intext( const char * s, size_t size )
-{
-  return nullptr;
-}
-
-const char * document::parse_intagname( const char * s, size_t size )
-{
-  return nullptr;
-}
-
-const char * document::parse_intag( const char * s, size_t size )
-{
-  return nullptr;
-}
-
 
 
 } } // namespace html } namespace wgui 

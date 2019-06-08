@@ -42,10 +42,8 @@ public:
 
 
 private:
-  const char* parse_intext( const char* s, size_t size );
-  const char* parse_intagname( const char* s, size_t size );
-  const char* parse_intag( const char* s, size_t size );
-
+  const char* find_tag( const char* str, size_t size );
+  const char* _strchr( const char* str, size_t size, char ch );
 
 private:
   body_element body_;
